@@ -38,6 +38,15 @@ async function ArchiveYearPage({ params }: ArchiveYearsProps) {
     newsContent = <NewsList news={news} />;
   }
 
+  const routeErrorCondition =
+    (selectedYear && !getAvailableNewsYears().includes(Number(selectedYear))) ||
+    (selectedMonth &&
+      !getAvailableNewsMonths(selectedYear).includes(Number(selectedMonth)));
+
+  if (routeErrorCondition) {
+    throw new Error("Invalid filter");
+  }
+
   return (
     <>
       <header id="archive-header">
