@@ -1,3 +1,4 @@
+import ModalBackdrop from "@/components/modal-backdrop";
 import { DUMMY_NEWS } from "@/dummy-news";
 import { notFound } from "next/navigation";
 
@@ -17,7 +18,7 @@ async function InterceptedImagePage({ params }: InterceptedImagePageProps) {
 
   return (
     <>
-      <div className="modal-backdrop" />
+      <ModalBackdrop />
       <dialog className="modal" open>
         <div className="fullscreen-image">
           <img
