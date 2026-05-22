@@ -1,17 +1,5 @@
+import { NewsListProps } from "@/app/(content)/types/news";
 import Link from "next/link";
-
-type NewsItem = {
-  id: string;
-  slug?: string;
-  title: string;
-  image?: string;
-  date: string;
-  content?: string;
-};
-
-type NewsListProps = {
-  news: NewsItem[];
-};
 
 function NewsList({ news }: NewsListProps) {
   return (

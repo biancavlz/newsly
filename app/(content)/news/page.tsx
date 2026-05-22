@@ -1,14 +1,6 @@
 import NewsList from "@/components/news-list";
 import { getAllNews } from "@/lib/news";
-
-type NewsItem = {
-  id: string;
-  slug?: string;
-  title: string;
-  image?: string;
-  date: string;
-  content?: string;
-};
+import { NewsItem } from "../types/news";
 
 async function NewsPage() {
   const news: NewsItem[] = getAllNews() as NewsItem[];

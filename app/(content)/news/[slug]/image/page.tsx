@@ -1,4 +1,5 @@
-import { DUMMY_NEWS } from "@/dummy-news";
+import { NewsItem } from "@/app/(content)/types/news";
+import { getNewsItem } from "@/lib/news";
 import { notFound } from "next/navigation";
 
 type ImagePageProps = {
@@ -9,7 +10,7 @@ type ImagePageProps = {
 
 async function ImagePage({ params }: ImagePageProps) {
   const { slug } = await params;
-  const newsItem = DUMMY_NEWS.find((item) => item.slug === slug);
+  const newsItem = (await getNewsItem(slug)) as NewsItem | null;
 
   if (!newsItem) {
     notFound();

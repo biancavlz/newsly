@@ -20,15 +20,15 @@ async function ArchiveYearPage({ params }: ArchiveYearsProps) {
   const selectedMonth = filter?.[1];
 
   let news;
-  let links = getAvailableNewsYears();
+  let links = await getAvailableNewsYears();
 
   if (selectedYear && !selectedMonth) {
-    news = getNewsForYear(selectedYear);
+    news = await getNewsForYear(selectedYear);
     links = getAvailableNewsMonths(selectedYear);
   }
 
   if (selectedYear && selectedMonth) {
-    news = getNewsForYearAndMonth(selectedYear, selectedMonth);
+    news = await getNewsForYearAndMonth(selectedYear, selectedMonth);
     links = [];
   }
 
@@ -38,10 +38,12 @@ async function ArchiveYearPage({ params }: ArchiveYearsProps) {
     newsContent = <NewsList news={news} />;
   }
 
+  const availableYears = await getAvailableNewsYears();
+
   const routeErrorCondition =
-    (selectedYear && !getAvailableNewsYears().includes(Number(selectedYear))) ||
+    (selectedYear && !availableYears.includes(selectedYear)) ||
     (selectedMonth &&
-      !getAvailableNewsMonths(selectedYear).includes(Number(selectedMonth)));
+      !getAvailableNewsMonths(selectedYear).includes(selectedMonth));
 
   if (routeErrorCondition) {
     throw new Error("Invalid filter");

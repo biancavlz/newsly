@@ -1,5 +1,6 @@
+import { NewsItem } from "@/app/(content)/types/news";
 import ModalBackdrop from "@/components/modal-backdrop";
-import { DUMMY_NEWS } from "@/dummy-news";
+import { getNewsItem } from "@/lib/news";
 import { notFound } from "next/navigation";
 
 type InterceptedImagePageProps = {
@@ -10,7 +11,7 @@ type InterceptedImagePageProps = {
 
 async function InterceptedImagePage({ params }: InterceptedImagePageProps) {
   const { slug } = await params;
-  const newsItem = DUMMY_NEWS.find((item) => item.slug === slug);
+  const newsItem = getNewsItem(slug) as NewsItem | null;
 
   if (!newsItem) {
     notFound();
