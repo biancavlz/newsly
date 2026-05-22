@@ -1,4 +1,5 @@
 import NewsList from "@/components/news-list";
+import { getAllNews } from "@/lib/news";
 
 type NewsItem = {
   id: string;
@@ -10,12 +11,7 @@ type NewsItem = {
 };
 
 async function NewsPage() {
-  const response = await fetch("http://localhost:8080/news");
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch news.");
-  }
-  const news: NewsItem[] = await response.json();
+  const news: NewsItem[] = getAllNews() as NewsItem[];
 
   return (
     <>
